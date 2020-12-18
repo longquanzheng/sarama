@@ -95,7 +95,8 @@ func main() {
 	} else if *algorithm == "sha256" {
 		conf.Net.SASL.SCRAMClientGeneratorFunc = func() sarama.SCRAMClient { return &XDGSCRAMClient{HashGeneratorFcn: SHA256} }
 		conf.Net.SASL.Mechanism = sarama.SASLTypeSCRAMSHA256
-
+	} else if *algorithm == "plain" {
+		conf.Net.SASL.Mechanism = sarama.SASLTypePlaintext
 	} else {
 		log.Fatalf("invalid SHA algorithm \"%s\": can be either \"sha256\" or \"sha512\"", *algorithm)
 	}
